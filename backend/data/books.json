@@ -1,0 +1,16 @@
+[
+  {
+    "id": "1",
+    "title": "Clean Code",
+    "author": "Robert C. Martin",
+    "category": "Technology",
+    "year": 2008
+  },
+  {
+    "id": "2",
+    "title": "A Brief History of Time",
+    "author": "Stephen Hawking",
+    "category": "Science",
+    "year": 1988
+  }
+]
