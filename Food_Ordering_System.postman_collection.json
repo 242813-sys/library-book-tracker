@@ -1,0 +1,249 @@
+{
+  "info": {
+    "_postman_id": "b2c3d4e5-f6a7-48b9-c0d1-223344556677",
+    "name": "Q2 - Online Food Ordering System API",
+    "description": "Postman Collection for Q2 Online Food Ordering System (NestJS + TypeORM + PostgreSQL)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Restaurants",
+      "item": [
+        {
+          "name": "GET All Restaurants",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:4000/restaurants",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "4000",
+              "path": ["restaurants"]
+            },
+            "description": "Retrieve all restaurants with their menu items"
+          },
+          "response": []
+        },
+        {
+          "name": "GET Restaurant by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:4000/restaurants/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "4000",
+              "path": ["restaurants", "1"]
+            },
+            "description": "Retrieve single restaurant by ID"
+          },
+          "response": []
+        },
+        {
+          "name": "POST Create Restaurant",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Burger Kingdom\",\n  \"address\": \"742 Evergreen Terrace\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:4000/restaurants",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "4000",
+              "path": ["restaurants"]
+            },
+            "description": "Create a new restaurant"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Menu Items (Guard & Validation Protected)",
+      "item": [
+        {
+          "name": "GET All Menu Items (With API Key)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "x-api-key",
+                "value": "food-ordering-secret-key-2026",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:4000/menu-items",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "4000",
+              "path": ["menu-items"]
+            },
+            "description": "List all menu items with their assigned restaurant"
+          },
+          "response": []
+        },
+        {
+          "name": "GET Menu Items - Test Guard (Without API Key -> 401)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:4000/menu-items",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "4000",
+              "path": ["menu-items"]
+            },
+            "description": "Tests the ApiKeyGuard - returns 401 Unauthorized"
+          },
+          "response": []
+        },
+        {
+          "name": "POST Add Menu Item (Valid)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "x-api-key",
+                "value": "food-ordering-secret-key-2026",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Double Cheese Smash Burger\",\n  \"price\": 11.99,\n  \"category\": \"Fast Food\",\n  \"description\": \"Two beef patties with cheddar cheese on brioche bun\",\n  \"restaurantId\": 1\n}"
+            },
+            "url": {
+              "raw": "http://localhost:4000/menu-items",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "4000",
+              "path": ["menu-items"]
+            },
+            "description": "Create a new menu item attached to a restaurant"
+          },
+          "response": []
+        },
+        {
+          "name": "POST Add Menu Item - Test Validation (Empty Name & Negative Price -> 400)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "x-api-key",
+                "value": "food-ordering-secret-key-2026",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"\",\n  \"price\": -5.00,\n  \"restaurantId\": 1\n}"
+            },
+            "url": {
+              "raw": "http://localhost:4000/menu-items",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "4000",
+              "path": ["menu-items"]
+            },
+            "description": "Tests DTO ValidationPipe (name must not be empty, price must be positive) - returns 400 Bad Request"
+          },
+          "response": []
+        },
+        {
+          "name": "GET Single Menu Item",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "x-api-key",
+                "value": "food-ordering-secret-key-2026",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:4000/menu-items/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "4000",
+              "path": ["menu-items", "1"]
+            },
+            "description": "Fetch a specific menu item by ID"
+          },
+          "response": []
+        },
+        {
+          "name": "PUT Update Menu Item",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "x-api-key",
+                "value": "food-ordering-secret-key-2026",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"price\": 13.50,\n  \"description\": \"Updated special recipe with extra cheese\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:4000/menu-items/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "4000",
+              "path": ["menu-items", "1"]
+            },
+            "description": "Update price or details of an existing menu item"
+          },
+          "response": []
+        },
+        {
+          "name": "DELETE Menu Item",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "x-api-key",
+                "value": "food-ordering-secret-key-2026",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:4000/menu-items/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "4000",
+              "path": ["menu-items", "1"]
+            },
+            "description": "Delete a menu item by ID"
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}

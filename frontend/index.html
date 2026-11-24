@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Library Book Tracker</title>
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-light">
+
+  <!-- Navigation Bar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="#">
+        <i class="bi bi-book-half me-2"></i>Library Book Tracker
+      </a>
+      <span class="navbar-text text-white-50">
+        Manage & organize your collection
+      </span>
+    </div>
+  </nav>
+
+  <main class="container my-4">
+    <!-- Feedback Alerts -->
+    <div id="alertBox"></div>
+
+    <div class="row g-4">
+      <!-- Add Book Form Column -->
+      <div class="col-lg-4 col-md-5">
+        <div class="card shadow-sm border-0 sticky-top" style="top: 20px;">
+          <div class="card-header bg-white py-3 border-0">
+            <h5 class="card-title mb-0 fw-semibold text-primary">
+              <i class="bi bi-plus-circle me-1"></i> Add New Book
+            </h5>
+          </div>
+          <div class="card-body">
+            <form id="bookForm" novalidate>
+              <div class="mb-3">
+                <label for="bookTitle" class="form-label fw-medium">Title <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" id="bookTitle" placeholder="e.g. The Great Gatsby" required>
+                <div class="invalid-feedback">Please enter the book title.</div>
+              </div>
+
+              <div class="mb-3">
+                <label for="bookAuthor" class="form-label fw-medium">Author <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" id="bookAuthor" placeholder="e.g. F. Scott Fitzgerald" required>
+                <div class="invalid-feedback">Please enter the author name.</div>
+              </div>
+
+              <div class="mb-3">
+                <label for="bookCategory" class="form-label fw-medium">Category <span class="text-danger">*</span></label>
+                <select class="form-select" id="bookCategory" required>
+                  <option value="" disabled selected>Select category...</option>
+                  <option value="Fiction">Fiction</option>
+                  <option value="Non-Fiction">Non-Fiction</option>
+                  <option value="Science">Science</option>
+                  <option value="Technology">Technology</option>
+                  <option value="History">History</option>
+                  <option value="Philosophy">Philosophy</option>
+                  <option value="Biography">Biography</option>
+                </select>
+                <div class="invalid-feedback">Please select a category.</div>
+              </div>
+
+              <div class="mb-3">
+                <label for="bookYear" class="form-label fw-medium">Publication Year <span class="text-danger">*</span></label>
+                <input type="number" class="form-control" id="bookYear" placeholder="e.g. 1925" min="1000" max="2099" required>
+                <div class="invalid-feedback">Please enter a valid publication year.</div>
+              </div>
+
+              <button type="submit" class="btn btn-primary w-100 fw-semibold py-2">
+                <i class="bi bi-bookmark-plus me-1"></i> Add Book
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- Books Display & Filter Column -->
+      <div class="col-lg-8 col-md-7">
+        <div class="card shadow-sm border-0 mb-4">
+          <div class="card-body d-flex flex-wrap align-items-center justify-content-between gap-3">
+            <div>
+              <h5 class="fw-bold mb-1">Book Collection</h5>
+              <span class="text-muted small" id="bookCount">Loading books...</span>
+            </div>
+            
+            <!-- Category Filter Controls -->
+            <div class="d-flex align-items-center gap-2">
+              <label for="categoryFilter" class="form-label mb-0 fw-medium small text-nowrap">Filter by Category:</label>
+              <select id="categoryFilter" class="form-select form-select-sm" style="min-width: 160px;">
+                <option value="All">All Categories</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Books List Container (Cards Grid) -->
+        <div id="booksContainer" class="row g-3">
+          <!-- Dynamically populated via DOM manipulation -->
+        </div>
+
+        <!-- Empty State Message -->
+        <div id="emptyState" class="text-center py-5 d-none">
+          <div class="display-6 text-muted mb-3"><i class="bi bi-journal-x"></i></div>
+          <h5 class="text-muted">No books found</h5>
+          <p class="text-secondary small">Add a new book using the form or select a different category filter.</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Bootstrap 5 JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
