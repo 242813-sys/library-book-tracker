@@ -1,0 +1,8 @@
+{
+  "name": "online-food-ordering-frontend",
+  "version": "1.0.0",
+  "description": "Frontend for Online Food Ordering System",
+  "scripts": {
+    "start": "node serve.js"
+  }
+}

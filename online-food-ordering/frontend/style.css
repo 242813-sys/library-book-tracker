@@ -1,0 +1,26 @@
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background-color: #f7f9fa;
+}
+
+.food-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border-radius: 12px;
+}
+
+.food-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0.5rem 1.25rem rgba(0, 0, 0, 0.08) !important;
+}
+
+.price-tag {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #dc3545;
+}
+
+.badge-res {
+  background-color: #fff3cd;
+  color: #856404;
+  font-weight: 600;
+}
